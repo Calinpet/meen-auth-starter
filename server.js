@@ -5,6 +5,7 @@ const app = express();
 require('dotenv').config();
 const mongoose = require('mongoose');
 const session = require('express-session');
+const methodOverride = require("method-override");
 
 // Database Configuration
 mongoose.connect(process.env.DATABASE_URL, {
@@ -22,6 +23,7 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 // Middleware
 // Body parser middleware: give us access to req.body
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"))
 
 app.use(
   session({
@@ -38,18 +40,12 @@ const sessionsController = require('./controllers/sessions');
 app.use('/sessions', sessionsController);
 
 app.get('/', (req, res) => {
-	res.render('index.ejs');
+	res.render('index.ejs', {
+    currentUser: req.session.currentUser
+  });
 });
 
-//INDUCES 
 
-//INDEX
-//NEW
-//DELETE
-//UPDATE
-//CREATE
-//EDIT
-//SHOW
 
 
 
