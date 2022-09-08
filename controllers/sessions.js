@@ -5,7 +5,12 @@ const bcrypt = require('bcrypt');
 const sessionsRouter = express.Router();
 const User = require('../models/user.js');
 
+
+
 // New (login page)
+sessionsRouter.get('/new', (req, res) => {
+	res.render('sessions/new.ejs')
+})
 
 // Create (login route)
 sessionsRouter.post('/', (req, res) => {
@@ -43,7 +48,7 @@ sessionsRouter.delete('/', (req, res) => {
       res.redirect('/');
   });
 })
-// Create (login route)
+
 
 // Export Sessions Router
 module.exports = sessionsRouter;
