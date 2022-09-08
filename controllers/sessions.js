@@ -11,7 +11,7 @@ const userRouter = require('./users.js');
 // New (login page)
 sessionsRouter.get('/new', (req, res) => {
 	res.render('sessions/new.ejs', {
-    currentUser: userRouter.session.currentUser
+    currentUser: req.session.currentUser
   });
 });
 
@@ -50,7 +50,7 @@ sessionsRouter.delete('/', (req, res) => {
   req.session.destroy((error) => {
       res.redirect('/');
   });
-})
+});
 
 
 // Export Sessions Router
